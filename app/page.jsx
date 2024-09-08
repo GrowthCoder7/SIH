@@ -1,5 +1,5 @@
 import Image from "next/image";
-
+import PanelTop from "./components/PanelTop"
 
 export default function () {
   return( 
@@ -35,5 +35,6 @@ export default function () {
       
       </div>
     </div>
+    <PanelTop/>
   </>);
 }
