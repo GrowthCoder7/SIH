@@ -1,33 +1,25 @@
+"use client"
 import React from "react";
-import * as Switch from "@radix-ui/react-switch";
+import Switch from '@mui/material/Switch';
+import PanelTop from "./PanelTop";
+import Box from '@mui/material/Box';
+import { Heatmap } from '@mui/x-charts-pro/Heatmap';
+import { data } from "../dumbData";
+const label = { inputProps: { 'aria-label': 'Color switch demo' } };
 
 const Panel = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-400 to-green-600 p-4">
-      <nav className="bg-gray-900 text-white p-4 rounded-lg mb-4 flex justify-between items-center">
-        <div className="text-lg">Control Panel</div>
-        <div className="flex space-x-4">
-          <button className="p-2 bg-gray-700 rounded-full">
-            <i className="fas fa-cog"></i>
-          </button>
-          <button className="p-2 bg-gray-700 rounded-full">
-            <i className="fas fa-home"></i>
-          </button>
-        </div>
-      </nav>
-
+    <>
+    <PanelTop/>
+    <div className="min-h-screen w-screen bg-gradient-to-br from-green-400 to-green-600 p-4">
+      
       <div className="grid grid-cols-2 gap-4">
         {/* Status Section */}
         <div className="bg-gray-800 text-white p-4 rounded-lg flex justify-between items-center">
           <div className="text-lg">Status</div>
           <div className="flex space-x-2 items-center">
             <div>Running</div>
-            <Switch.Root
-              className="bg-gray-600 w-12 h-6 rounded-full relative"
-              id="switch-1"
-            >
-              <Switch.Thumb className="block w-5 h-5 bg-white rounded-full translate-x-1 will-change-transform transition-transform duration-100 ease-[cubic-bezier(0.22, 1, 0.36, 1)]" />
-            </Switch.Root>
+            <Switch {...label} defaultChecked color="secondary" />
           </div>
         </div>
 
@@ -36,12 +28,7 @@ const Panel = () => {
           <div className="text-lg">Water Supply Inlet</div>
           <div className="flex space-x-2 items-center">
             <div>Stopped</div>
-            <Switch.Root
-              className="bg-gray-600 w-12 h-6 rounded-full relative"
-              id="switch-2"
-            >
-              <Switch.Thumb className="block w-5 h-5 bg-white rounded-full translate-x-1 will-change-transform transition-transform duration-100 ease-[cubic-bezier(0.22, 1, 0.36, 1)]" />
-            </Switch.Root>
+            <Switch {...label} defaultChecked color="warning" />
           </div>
         </div>
 
@@ -53,10 +40,19 @@ const Panel = () => {
         </div>
 
         {/* Algae Density Heatmap */}
-        <div className="bg-white p-4 rounded-lg">
+        <div className="bg-white p-4 rounded-lg h-80">
           <h2 className="font-bold text-lg">Density of Algae</h2>
-          <div className="w-full h-32 bg-red-200 rounded-lg flex items-center justify-center">
-            <p>Heatmap Placeholder</p>
+          <div className="w-full bg-red-200 rounded-lg flex  justify-center h-[16.5rem] content-center">
+          <Box sx={{ width: '100%', maxWidth: 400 , height:"75%"}}>
+      <Heatmap
+        xAxis={[{ data: [1, 2, 3, 4] }]}
+        yAxis={[{ data: ['A', 'B', 'C', 'D', 'E'] }]}
+        series={[{ data, highlightScope: { highlight: 'item', fade: 'global' } }]}
+        margin={{ top: 5, right: 5, left: 20 }}
+        height={300}
+      />
+    </Box>
+
           </div>
         </div>
 
@@ -71,6 +67,7 @@ const Panel = () => {
         </div>
       </div>
     </div>
+    </>
   )
 }
 

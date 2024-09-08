@@ -1,10 +1,12 @@
 import Image from "next/image";
 import PanelTop from "./components/PanelTop"
+import Topbar from "./components/Topbar";
 
 export default function () {
   return( 
   <>
     <div className="main min-h-screen min-w-full">
+      <Topbar/>
       <div className="hero-image h-[35rem] flex relative rounded-md">
         <Image src={'/image1.png'} className="rounded-md opacity-70 object-cover w-full h-full" width={1000} height={1500}/>
         <div className="absolute w-screen text-center font-extrabold my-[13rem] text-white text-6xl">
